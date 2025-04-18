@@ -90,7 +90,7 @@ img {
 button {
   cursor: pointer;
   padding: 0.8rem 1.5rem;
-  background: var(--gradient-primary);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
   border-radius: 4px;
@@ -102,6 +102,7 @@ button {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  animation: pulse 2s infinite;
 }
 
 button:before {
@@ -121,14 +122,36 @@ button:hover:before {
   opacity: 1;
 }
 
-button:hover {
+.btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+  animation: gradient-pulse 3s ease infinite;
+}
+
+@keyframes gradient-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 button:active {
   transform: translateY(-1px);
   box-shadow: 0 3px 10px rgba(230, 57, 70, 0.3);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 64, 128, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 64, 128, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 64, 128, 0.2);
+  }
 }
 
 ul, ol {
@@ -256,6 +279,44 @@ tr:nth-child(even) {
 .primary-navigation a:hover::after,
 .primary-navigation .page-active::after {
   width: 100%;
+}
+
+.primary-navigation a[href="#contact"],
+.primary-navigation a[href="/about-us"] {
+  background: linear-gradient(45deg, var(--primary-color), rgba(15, 99, 183, 0.3));
+   color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-navigation a[href="#contact"]:hover,
+.primary-navigation a[href="/about-us"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 64, 128, 0.3);
+}
+
+.primary-navigation a[href="#contact"]::before,
+.primary-navigation a[href="/about-us"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.primary-navigation a[href="#contact"]:hover::before,
+.primary-navigation a[href="/about-us"]:hover::before {
+  left: 100%;
+}
+
+.primary-navigation a[href="https://rightroute.me/"] {
+  display: none;
 }
 
 /* Contact Button in Navbar */
@@ -1274,3 +1335,6 @@ tr:nth-child(even) {
       font-weight: 600;
     }
   }
+ 
+
+
