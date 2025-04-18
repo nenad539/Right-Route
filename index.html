@@ -43,32 +43,24 @@ Copyright © All rights Reserved
 </div>
 <button class="openbtn" onclick="openNav()"><i class="fa fa-bars"></i></button>
 
-<!-- Header -->
+<!-- Header (updated navigation) -->
 <div class="container-top">
-  <div class="container-inner">
-    <div class="brand-top">
-      <div class="logo-over">
-        <div class="logo-bg">
-          <a href="https://rightroute.me/"><img src="img/rightroute-logo-mne-small.png"></a>
-        </div>
-      </div>
+  <div class="header">
+    <!-- Left side navigation -->
+    <nav role="navigation" class="primary-navigation">
+      <ul>
+        <li><a href="https://rightroute.me/" class="page-active">Home</a></li>
+        <li><a href="/about-us">About us</a></li>
+        <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Right side logo as home button -->
+    <div class="logo-header">
+      <a href="https://rightroute.me/"><img src="img/rightroute-logo-mne-small.png" alt="RightRoute Montenegro Logo"></a>
     </div>
-    <div class="header">
-      <nav role="navigation" class="primary-navigation">
-        <ul>
-          <li><a href="https://rightroute.me/" class="page-active">Home</a></li>
-          <li class="podmen"><a title="Motorcycle tours around Montenegro" href="#">Motorbike Tours &dtrif;</a>
-            <ul class="dropdown">
-              <li><a href="#5-day">5 Day Tour</a></li>
-              <li><a href="#3-day">3 Day Tour</a></li>
-              <li><a href="#1-day">1 Day Tour</a></li>
-            </ul>
-          </li>
-          <li><a title="Motorbike rent Montenegro" href="#rent">Motorcycle Rental</a></li>
-          <li><a href="/about-us">About us</a></li>
-          <li><a href="/adv-summit">ADV Summit Montenegro</a></li>
-        </ul>
-      </nav>				
+  </div>
+</div>			
       <div class="social-top">
         <a href="https://www.facebook.com/rightroute.me" target="_blank"><i class="fab fa-facebook"></i></a>
         <a href="https://www.instagram.com/rightroute.me/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -79,16 +71,38 @@ Copyright © All rights Reserved
   </div>
   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-up"></i></button>
 </div>
+<!-- Mobile Navigation -->
+<div id="mySidepanel" class="sidepanel">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> 
+  <a href="https://rightroute.me/">Home</a>
+  <a href="/about-us">About us</a>
+  <a href="#5-day">5 Day Tour</a>
+  <a href="#3-day">3 Day Tour</a>
+  <a href="#1-day">1 Day Tour</a>
+  <a href="#rent">Motorcycle Rental</a>
+  <a href="#contact">Contact Us</a>
+  <div class="mmenu-contact">
+    <a href="https://msng.link/o/?38269556441=vi" target="_blank" class="wavib"><span><i class="fab fa-whatsapp"></i> Chat on Viber</span></a>
+    <a href="https://wa.me/38269556441" target="_blank" class="wavib"><span style="margin-top: 15px;"><i class="fab fa-viber"></i> Chat on WhatsApp</span></a>
+  </div>
+</div>
+<button class="openbtn" onclick="openNav()"><i class="fa fa-bars"></i></button>
 
-<!-- Hero Section -->
-<div class="fw-content">
+<!-- Hero Section with Automatic Slideshow -->
+<div class="slideshow-container">
+  <div class="slideshow-slide"></div>
+  <div class="slideshow-slide"></div>
+  <div class="slideshow-slide"></div>
+  <div class="slideshow-slide"></div>
+  <div class="slideshow-slide"></div>
+  <div class="slideshow-overlay"></div>
+  
   <div class="hero-text">
     <span>Welcome to <strong>Right Route Montenegro</strong></span>
     <p>If you like motorcycling adventures, you're in the right place</p>
     <a href="#5-day"><button>Start your adventure</button></a>
   </div>
 </div>
-
 <!-- Main Content -->
 <div class="container">
   <div class="container-inner">		
