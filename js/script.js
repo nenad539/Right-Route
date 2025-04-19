@@ -95,4 +95,59 @@ buttons.forEach(button => {
       button.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
   });
 });
+// Optional: Add floating particles on hover
+document.querySelector('.hero-button').addEventListener('mouseenter', function(e) {
+  const button = e.target;
+  const particles = 15;
+  
+  for (let i = 0; i < particles; i++) {
+    const particle = document.createElement('span');
+    particle.classList.add('particle');
+    
+    // Random properties
+    const size = Math.random() * 10 + 5;
+    const posX = Math.random() * button.offsetWidth;
+    const posY = Math.random() * button.offsetHeight;
+    const duration = Math.random() * 3 + 2;
+    
+    // Apply styles
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${posX}px`;
+    particle.style.top = `${posY}px`;
+    particle.style.animation = `float-up ${duration}s ease-out forwards`;
+    
+    button.appendChild(particle);
+    
+    // Remove particle after animation
+    setTimeout(() => {
+      particle.remove();
+    }, duration * 1000);
+  }
+});
 
+// Add CSS for particles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes float-up {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(${Math.random() > 0.5 ? '-' : ''}${Math.random() * 30 + 10}px, -${Math.random() * 50 + 30}px) scale(0); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', function() {
+  const vehicles = document.querySelectorAll('.vehicle-card');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  vehicles.forEach(vehicle => {
+    observer.observe(vehicle);
+  });
+});

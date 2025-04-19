@@ -29,6 +29,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--bg-color);
+  overflow-x: hidden;
 }
 
 a {
@@ -527,44 +528,122 @@ tr:nth-child(even) {
   animation: fadeInUp 1s ease-out 0.5s both;
 }
 
-.hero-text button {
-  animation: fadeIn 1s ease-out 1s both;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  background: var(--gradient-primary);
-  position: relative;
-  z-index: 1;
-  transition: all 0.5s ease;
+
+
+.hero-button {
+  /* Base Styles */
+  display: inline-block;
+  padding: 18px 45px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  text-decoration: none;
   border-radius: 50px;
-  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Gradient Background Animation */
+  background: linear-gradient(90deg, 
+    #ff4d4d, 
+    #f9cb28, 
+    #ff4d4d);
+  background-size: 300% 100%;
+  animation: gradientShift 6s ease infinite;
+  
+  /* Border Animation */
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
 }
 
-.hero-text button:before {
+.hero-button::before {
+  /* Shine Effect */
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  animation: shine 5s infinite;
+}
+
+.hero-button::after {
+  /* Pulse Ring Effect */
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
-  background: var(--gradient-hover);
-  z-index: -1;
-  transition: opacity 0.5s ease;
+  animation: pulse 3s infinite;
   opacity: 0;
+  z-index: -1;
 }
 
-.hero-text button:hover:before {
-  opacity: 1;
+/* Hover Effects */
+.hero-button:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  animation: none;
+  background-position: 100% 0;
 }
 
-.hero-text button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(230, 57, 70, 0.4);
+.hero-button:hover::before {
+  left: 130%;
+  transition-delay: 0.2s;
 }
 
-.hero-text button:active {
-  transform: translateY(-2px);
+.hero-button:active {
+  transform: translateY(-2px) scale(0.98);
 }
+
+/* Keyframe Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shine {
+  0% { left: -60%; }
+  20% { left: 130%; }
+  100% { left: 130%; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.1); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Optional: Add floating particles */
+.hero-button .particle {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-button {
+    padding: 15px 35px;
+    font-size: 1rem;
+  }
+}
+
 
 @keyframes fadeInDown {
   from {
@@ -611,7 +690,28 @@ tr:nth-child(even) {
   border-radius: 8px;
 }
 
+/* Make the landing (hero) section full screen */
+.fw-content {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: #004080; /* Or your hero background image/color */
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
 
+/* Remove top margin from the section after .fw-content */
+.fw-content + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 
 /* Media Queries */
 @media screen and (max-width: 991px) {
@@ -830,6 +930,193 @@ tr:nth-child(even) {
   .dropdown a:hover {
     background-color: var(--light-color);
   }
+  /* Font Awesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.tour-details-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.detail-section {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.detail-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.detail-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  z-index: 2;
+}
+
+.included-section::before {
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.optional-section::before {
+  background: linear-gradient(90deg, #FFC107, #FF9800);
+}
+
+.requirements-section::before {
+  background: linear-gradient(90deg, #2196F3, #03A9F4);
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 25px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-header i {
+  font-size: 1.8rem;
+  margin-right: 15px;
+}
+
+.included-section .detail-header i {
+  color: #4CAF50;
+}
+
+.optional-section .detail-header i {
+  color: #FFC107;
+}
+
+.requirements-section .detail-header i {
+  color: #2196F3;
+}
+
+.detail-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.detail-content {
+  padding: 20px 25px;
+}
+
+.detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detail-list li {
+  padding: 12px 0;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.detail-list li:last-child {
+  border-bottom: none;
+}
+
+.detail-list li:hover {
+  transform: translateX(5px);
+}
+
+.detail-list li i {
+  width: 30px;
+  font-size: 1.1rem;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.detail-list li:hover i {
+  transform: scale(1.2);
+}
+
+.included-section .detail-list li:hover i {
+  color: #4CAF50;
+}
+
+.optional-section .detail-list li:hover i {
+  color: #FF9800;
+}
+
+.requirements-section .detail-list li:hover i {
+  color: #2196F3;
+}
+
+.detail-list li span {
+  flex: 1;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.detail-list li:hover span {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Animated background effect on hover */
+.detail-list li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.03), transparent);
+  transition: all 0.6s ease;
+}
+
+.detail-list li:hover::after {
+  left: 100%;
+}
+
+/* Entrance animations */
+@keyframes slideInFromBottom {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.included-section {
+  animation: slideInFromBottom 0.6s ease 0.1s both;
+}
+
+.optional-section {
+  animation: slideInFromBottom 0.6s ease 0.2s both;
+}
+
+.requirements-section {
+  animation: slideInFromBottom 0.6s ease 0.3s both;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tour-details-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .detail-section {
+    margin-bottom: 0;
+  }
+}
   
   /* Social Icons */
   .social-top {
@@ -918,6 +1205,209 @@ tr:nth-child(even) {
   .wavib i {
     margin-right: 0.5rem;
   }
+  /* Base Styles */
+.vehicle-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.vehicle-card {
+  position: relative;
+  perspective: 1500px;
+  cursor: pointer;
+}
+
+/* 3D Vehicle Container */
+.vehicle-3d-container {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: rotateY(15deg) rotateX(5deg);
+  margin-bottom: 30px;
+}
+
+.vehicle-card:hover .vehicle-3d-container {
+  transform: rotateY(5deg) rotateX(0deg) translateY(-10px);
+}
+
+/* Vehicle Image */
+.vehicle-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+  transform: translateZ(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.vehicle-card:hover .vehicle-image {
+  transform: translateZ(50px);
+  box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+  filter: brightness(1) contrast(1.2);
+}
+
+/* Vehicle Shadow */
+.vehicle-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: 10%;
+  width: 80%;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(10px);
+  transform: rotateX(85deg) scale(0.8);
+  opacity: 0.7;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: -1;
+}
+
+.vehicle-card:hover .vehicle-shadow {
+  transform: rotateX(85deg) scale(0.9);
+  opacity: 0.9;
+  filter: blur(15px);
+}
+
+/* Vehicle Info */
+.vehicle-info {
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.vehicle-info h3 {
+  margin: 0 0 15px;
+  font-size: 1.5rem;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.vehicle-card:hover .vehicle-info h3 {
+  transform: translateY(-5px);
+  color: #2a5298;
+}
+
+/* Pricing Details */
+.pricing-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.vehicle-card:hover .pricing-details {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 15px;
+}
+
+.price-bubble, .deposit-bubble {
+  background: white;
+  padding: 8px 15px;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.price-bubble {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+}
+
+.deposit-bubble {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+}
+
+.price-bubble:hover, .deposit-bubble:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.price-bubble .days {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.price-bubble .amount {
+  font-weight: bold;
+  color: #2a5298;
+  font-size: 1.1rem;
+}
+
+.deposit-bubble span:first-child {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.deposit-bubble span:last-child {
+  font-weight: bold;
+  color: #e65100;
+  font-size: 1.1rem;
+}
+
+/* Scroll Animation */
+@keyframes vehicleEntrance {
+  from { 
+    opacity: 0;
+    transform: translateY(50px) rotateY(30deg);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) rotateY(15deg);
+  }
+}
+
+.vehicle-card {
+  animation: vehicleEntrance 0.8s ease forwards;
+  opacity: 0;
+}
+
+.vehicle-card:nth-child(1) { animation-delay: 0.1s; }
+.vehicle-card:nth-child(2) { animation-delay: 0.3s; }
+.vehicle-card:nth-child(3) { animation-delay: 0.5s; }
+.vehicle-card:nth-child(4) { animation-delay: 0.7s; }
+
+/* Floating Effect */
+@keyframes float {
+  0%, 100% { transform: rotateY(15deg) rotateX(5deg) translateY(0); }
+  50% { transform: rotateY(15deg) rotateX(5deg) translateY(-10px); }
+}
+
+.vehicle-3d-container {
+  animation: float 6s ease-in-out infinite;
+}
+
+.vehicle-card:nth-child(1) .vehicle-3d-container { animation-delay: 0s; }
+.vehicle-card:nth-child(2) .vehicle-3d-container { animation-delay: 0.5s; }
+.vehicle-card:nth-child(3) .vehicle-3d-container { animation-delay: 1s; }
+.vehicle-card:nth-child(4) .vehicle-3d-container { animation-delay: 1.5s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vehicle-gallery {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  
+  .vehicle-3d-container {
+    transform: rotateY(5deg) rotateX(5deg);
+  }
+  
+  .vehicle-card:hover .vehicle-3d-container {
+    transform: rotateY(0deg) rotateX(0deg) translateY(-5px);
+  }
+}
   
   /* Hero Section */
   .fw-content {
@@ -1060,6 +1550,44 @@ tr:nth-child(even) {
   #5-day, #3-day, #1-day, #rent {
     scroll-margin-top: 120px;
     padding: 2rem 0;
+  }
+
+  /* Center and style the h2 in the 5-day section with animation */
+   h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--primary-color);
+    background: linear-gradient(90deg, #ff8c94 0%, #e63946 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 2rem auto 2.5rem auto;
+    padding: 0.5rem 2rem;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    box-shadow: 0 4px 24px rgba(230, 57, 70, 0.08);
+    animation: popIn 1s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes popIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(40px);
+      filter: blur(4px);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.05) translateY(-8px);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+    }
   }
   
   /* Contact Section */
@@ -1335,6 +1863,186 @@ tr:nth-child(even) {
       font-weight: 600;
     }
   }
- 
+
+  .tour-days-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .tour-days-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .tour-days-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .tour-days-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tour-day-card {
+    position: relative;
+    height: 350px;
+    perspective: 1000px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  .tour-day-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    border-radius: 15px;
+  }
+  
+  .card-front {
+    transform: rotateY(0deg);
+    background: linear-gradient(45deg, #1e3c72 0%, #2a5298 100%);
+  }
+  
+  .card-back {
+    transform: rotateY(180deg);
+    background: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .tour-day-card:hover .card-front {
+    transform: rotateY(-180deg);
+  }
+  
+  .tour-day-card:hover .card-back {
+    transform: rotateY(0deg);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: all 0.5s ease;
+  }
+  
+  .tour-day-card:hover .card-image {
+    opacity: 0.3;
+  }
+  
+  .card-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  
+  .tour-day-card:hover .card-title {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  
+  .card-back h3 {
+    color: #2a5298;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    position: relative;
+  }
+  
+  .card-back h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #2a5298;
+  }
+  
+  .card-back p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .day-highlights {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .day-highlights li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .day-highlights li:hover {
+    transform: translateX(5px);
+    color: #2a5298;
+  }
+  
+  .day-highlights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #2a5298;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .day-highlights li:hover::before {
+    transform: translateX(5px);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .tour-day-card:nth-child(1) { animation: fadeIn 0.5s ease 0.1s both; }
+  .tour-day-card:nth-child(2) { animation: fadeIn 0.5s ease 0.2s both; }
+  .tour-day-card:nth-child(3) { animation: fadeIn 0.5s ease 0.3s both; }
+  .tour-day-card:nth-child(4) { animation: fadeIn 0.5s ease 0.4s both; }
+  .tour-day-card:nth-child(5) { animation: fadeIn 0.5s ease 0.5s both; }
 
 
+/* Center the 3-day tour cards in the #day-3-tour section */
+#day-3-tour .tour-days-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  padding: 20px 0;
+  margin: 0 auto;
+  flex-wrap: wrap;
+ }
+
+#day-3-tour .tour-day-card {
+  flex: 0 1 350px;
+  margin: 0 10px;
+}
