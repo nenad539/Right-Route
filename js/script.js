@@ -151,3 +151,25 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(vehicle);
   });
 });
+document.addEventListener('DOMContentLoaded', function() {
+  const loadingScreen = document.querySelector('.loading-screen');
+  const startTime = Date.now();
+  const minDisplayTime = 2000; // 2 seconds minimum
+
+  function hideLoader() {
+    const elapsed = Date.now() - startTime;
+    const remainingTime = Math.max(0, minDisplayTime - elapsed);
+    
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+      setTimeout(() => loadingScreen.remove(), 500);
+    }, remainingTime);
+  }
+
+  if (document.readyState === 'complete') {
+    hideLoader();
+  } else {
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, minDisplayTime + 1000); // Fallback
+  }
+});
